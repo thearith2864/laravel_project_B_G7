@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\commentcontroller;
+use App\Http\Controllers\Api\postcontroller;
+use App\Http\Controllers\Api\reactioncontroller;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +25,10 @@ Route::post('user/register',[UserController::class,'createUser']);
 Route::get('user/register/list',[UserController::class,'listRigisterUsers']);
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
+
+route::post('post/create', [postcontroller::class, 'store']);
+route::get('post/list', [postcontroller::class, 'index']);
+
+Route::post('comment/create', [commentcontroller::class, 'store']);
+
+Route::post('reaction/craete', [reactioncontroller::class, 'store']);
