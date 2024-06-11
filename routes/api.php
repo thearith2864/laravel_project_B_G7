@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\commentcontroller;
 use App\Http\Controllers\Api\postcontroller;
 use App\Http\Controllers\Api\reactioncontroller;
@@ -29,13 +30,16 @@ Route::get('user/register/list',[UserController::class,'listRigisterUsers']);
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 
+
+//profile routes
+Route::get('profile/list',[ProfileController::class,'index']);
+Route::post('profile/create',[ProfileController::class,'store']);
+Route::get('profile/show/{id}',[ProfileController::class,'show']);
+Route::put('profile/update/{id}',[ProfileController::class,'update']);
+Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
+
+
 route::post('post/create', [postcontroller::class, 'store']);
 route::get('post/list', [postcontroller::class, 'index']);
-
 Route::post('comment/create', [commentcontroller::class, 'store']);
-
 Route::post('reaction/craete', [reactioncontroller::class, 'store']);
-//user logout
-// routes/api.php
-Route::post('/logout', [UserController::class,'Logout'])->middleware('auth:sanctum')->name('logout');
-// Route::get('user/logout/list',[UserController::class,'listLogoutUsers']);
