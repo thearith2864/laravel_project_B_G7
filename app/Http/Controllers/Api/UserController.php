@@ -57,49 +57,49 @@ class UserController extends Controller
     }
 
     // user login function
-    // public function userLogin(Request $request)
-    // {
-    //     try {
-    //         $validateUser = Validator::make($request->all(), [
-    //             'email' => 'required|string|email|max:255',
-    //             'password' => 'required|string|min:8'
-    //         ]);
+    public function userLogin(Request $request)
+    {
+        try {
+            $validateUser = Validator::make($request->all(), [
+                'email' => 'required|string|email|max:255',
+                'password' => 'required|string|min:8'
+            ]);
 
-    //         if ($validateUser->fails()) {
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => $validateUser->errors()
-    //             ], 400);
-    //         }
+            if ($validateUser->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => $validateUser->errors()
+                ], 400);
+            }
 
-    //         if (!Auth::attempt($request->only(['email', 'password']))) {
-    //             return response()->json([
-    //                 'status' => false,
-    //                 'message' => 'Email or password is incorrect'
-    //             ], 401);
-    //         }
+            if (!Auth::attempt($request->only(['email', 'password']))) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Email or password is incorrect'
+                ], 401);
+            }
 
-    //         $user = User::where('email', $request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
-    //         return response()->json([
-    //             'status' => true,
-    //             'data' => $user,
-    //             'message' => 'User logged in successfully',
-    //             'token' => $user->createToken('API TOKEN')->plainTextToken
-    //         ], 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $th->getMessage()
-    //         ], 500);
-    //     }
-    // }
+            return response()->json([
+                'status' => true,
+                'data' => $user,
+                'message' => 'User logged in successfully',
+                'token' => $user->createToken('API TOKEN')->plainTextToken
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
 
-    // public function listLoginUsers()
-    // {
-    //     $users = User::all();
-    //     return response()->json([
-    //         'users' => $users
-    //     ], 200);
-    // }
+    public function listLoginUsers()
+    {
+        $users = User::all();
+        return response()->json([
+            'users' => $users
+        ], 200);
+    }
 }
