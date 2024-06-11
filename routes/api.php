@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\commentcontroller;
+use App\Http\Controllers\Api\postcontroller;
+use App\Http\Controllers\Api\reactioncontroller;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +34,9 @@ Route::post('profile/create',[ProfileController::class,'store']);
 Route::get('profile/show/{id}',[ProfileController::class,'show']);
 Route::put('profile/update/{id}',[ProfileController::class,'update']);
 Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
+
+
+route::post('post/create', [postcontroller::class, 'store']);
+route::get('post/list', [postcontroller::class, 'index']);
+Route::post('comment/create', [commentcontroller::class, 'store']);
+Route::post('reaction/craete', [reactioncontroller::class, 'store']);

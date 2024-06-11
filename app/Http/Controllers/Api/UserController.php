@@ -14,13 +14,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function createUser(Request $request)
+        public function createUser(Request $request)
     {
         try {
             $validateUser = Validator::make($request->all(), [
                 'name' => 'required|string|max:30',
                 'email' => 'required|string|email|max:50|unique:users',
                 'password' => 'required|string|min:8'
+                
             ]);
 
             if ($validateUser->fails()) {
