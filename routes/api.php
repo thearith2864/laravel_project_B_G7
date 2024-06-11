@@ -20,15 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+    
 });
 Route::post('user/register',[UserController::class,'createUser']);
 Route::get('user/register/list',[UserController::class,'listRigisterUsers']);
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 
-route::post('post/create', [postcontroller::class, 'store']);
-route::get('post/list', [postcontroller::class, 'index']);
-
-Route::post('comment/create', [commentcontroller::class, 'store']);
-
-Route::post('reaction/craete', [reactioncontroller::class, 'store']);
+Route::middleware("auth:sanctum")->group(function(){
+    route::post('post/create', [postcontroller::class, 'store']);
+    route::get('post/list', [postcontroller::class, 'index']);
+    Route::post('comment/create', [commentcontroller::class, 'store']);
+    Route::post('reaction/craete', [reactioncontroller::class, 'store']);
+});
