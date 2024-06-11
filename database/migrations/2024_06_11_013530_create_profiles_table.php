@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('image');
-            $table->string('name');
-            $table->string('email');
+            $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

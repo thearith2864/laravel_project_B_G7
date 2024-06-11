@@ -15,8 +15,8 @@ class ProfileController extends Controller
     public function index()
     {
         $Profile = Profile::list();
-        $Profile = ProfileResource::collection($Profile);
-        return response()->json(['status' => true, 'data' => $Profile], 200);
+        $Profiles = ProfileResource::collection($Profile);
+        return response()->json(['status' => true, 'data' => $Profiles], 200);
     }
 
     /**
