@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,11 @@ Route::post('user/register',[UserController::class,'createUser']);
 Route::get('user/register/list',[UserController::class,'listRigisterUsers']);
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
+
+
+//profile routes
+Route::get('profile/list',[ProfileController::class,'index']);
+Route::post('profile/create',[ProfileController::class,'store']);
+Route::get('profile/show/{id}',[ProfileController::class,'show']);
+Route::put('profile/update/{id}',[ProfileController::class,'update']);
+Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
