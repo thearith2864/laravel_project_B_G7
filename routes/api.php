@@ -36,13 +36,13 @@ Route::middleware("auth:sanctum")->group(function(){
     route::get('post/list', [postcontroller::class, 'index']);
     Route::post('comment/create', [commentcontroller::class, 'store']);
     Route::post('reaction/craete', [reactioncontroller::class, 'store']);
+//profile routes
+    Route::get('profile/list',[ProfileController::class,'index']);
+    Route::post('profile/create',[ProfileController::class,'store']);
+    Route::get('profile/show/{id}',[ProfileController::class,'show']);
+    Route::put('profile/update/{id}',[ProfileController::class,'update']);
+    Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
 });
 
-//profile routes
-Route::get('profile/list',[ProfileController::class,'index']);
-Route::post('profile/create',[ProfileController::class,'store']);
-Route::get('profile/show/{id}',[ProfileController::class,'show']);
-Route::put('profile/update/{id}',[ProfileController::class,'update']);
-Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
 
 
