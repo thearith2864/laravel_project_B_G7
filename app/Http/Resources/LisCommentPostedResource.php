@@ -17,6 +17,7 @@ class LisCommentPostedResource extends JsonResource
         return [
             "user_comment" => new LisUserPostedResource($this->user),
             "Comment" => $this->comment,
+            "date_comment" => $this->updated_at -> format('Y-m-d H:i:s'),
         ];
     }
 }

@@ -54,6 +54,8 @@ class postcontroller extends Controller
     public function update(Request $request, string $id)
     {
         //
+       Post::edit($request, $id);
+        return ["success" => true, "Message" =>"Post updated successfully"];
     }
 
     /**
@@ -62,5 +64,7 @@ class postcontroller extends Controller
     public function destroy(string $id)
     {
         //
+        Post::destroy($id);
+        return ["success" => true, "Message" =>"Post deleted successfully"];
     }
 }

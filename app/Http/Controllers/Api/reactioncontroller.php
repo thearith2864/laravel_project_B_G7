@@ -8,17 +8,7 @@ use Illuminate\Http\Request;
 
 class reactioncontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
@@ -26,27 +16,17 @@ class reactioncontroller extends Controller
         return ["success" => true, "Message" =>"React created successfully"];
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
+        Reaction::updateReaction($request, $id);
+        return ["success" => true, "Message" =>"React updated successfully"];
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
+        Reaction::destroyReaction($id);
+        return ["success" => true, "Message" =>"React deleted successfully"];
     }
 }

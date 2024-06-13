@@ -25,4 +25,14 @@ class Reaction extends Model
         return $data;
         
     }
+    public static function updateReaction ($request, $id){
+        $data = $request->only('type_react');
+        $data = self::updateOrCreate(['id' => $id], $data);
+        return $data;
+    }
+    public static function destroyReaction ($id){
+        $data = self::find($id);
+        $data->delete();
+        return $data;
+    }
 }

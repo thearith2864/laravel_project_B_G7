@@ -17,6 +17,7 @@ class LisReactPostedResource extends JsonResource
         return [
             "user_Reaction" => new LisUserPostedResource($this->user),
             "reaction" => $this->type_react,
+            "date_reaction" => $this->updated_at -> format('Y-m-d H:i:s'),
         ];
     }
 }

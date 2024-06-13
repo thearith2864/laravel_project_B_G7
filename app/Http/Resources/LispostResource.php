@@ -18,6 +18,7 @@ class LispostResource extends JsonResource
             'User_posted' => new LisUserPostedResource($this->user),
             'Title' => $this->title,
             'image' => "http://127.0.0.1:8000". $this->media->image,
+            "date_Post" => $this->updated_at -> format('Y-m-d H:i:s'),
             'Comments' => LisCommentPostedResource::collection($this->comment),
             'total_Comments' => $this->comment -> count(),
             'Reactions' => LisReactPostedResource::collection($this->reaction)   ,
