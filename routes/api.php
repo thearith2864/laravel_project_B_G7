@@ -55,9 +55,6 @@ Route::middleware("auth:sanctum")->group(function(){
     Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
 });
 
-<<<<<<< HEAD
-
-=======
 //profile routes
 Route::get('profile/list',[ProfileController::class,'index']);
 Route::post('profile/create',[ProfileController::class,'store']);
@@ -67,5 +64,4 @@ Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::put('profile', [ProfileController::class, 'update']);
 });
->>>>>>> profile
 
