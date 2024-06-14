@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\commentcontroller;
+use App\Http\Controllers\Api\FriendController;
+use App\Http\Controllers\Api\FriendShipController;
 use App\Http\Controllers\Api\postcontroller;
 use App\Http\Controllers\Api\reactioncontroller;
 use App\Http\Controllers\Api\UserController;
@@ -45,4 +47,16 @@ Route::get('profile/show/{id}',[ProfileController::class,'show']);
 Route::put('profile/update/{id}',[ProfileController::class,'update']);
 Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
 
+// Friendships
+Route::get('friend/list', [FriendController::class,'index']);
+Route::post('friend/create', [FriendController::class,'store']);
+Route::get('friend/show/{id}', [FriendController::class,'show']);
+Route::put('friend/update/{id}', [FriendController::class,'update']);
+Route::delete('friend/delete/{id}', [FriendController::class,'destroy']);
+// Route::post('friend/accept/{id}', [FriendshipController::class,'accept']);
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/friends', [FriendshipController::class, 'index'])->name('friends.index');
+    Route::delete('/friends/{friend}', [FriendshipController::class, 'destroy'])->name('friends.destroy');
+    Route::post('/friends', [FriendshipController::class, 'store'])->name('friends.store');
+});

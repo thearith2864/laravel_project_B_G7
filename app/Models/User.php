@@ -47,4 +47,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')
+            ->withTimestamps();
+    }
+
+    public function addFriend(User $friend)
+    {
+        $this->friends()->attach($friend->id);
+        $friend->friends()->attach($this->id);
+    }
+
+    public function removeFriend(User $friend)
+    {
+        $this->friends()->detach($friend->id);
+        $friend->friends()->detach($this->id);
+    }
 }
