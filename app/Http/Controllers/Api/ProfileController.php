@@ -6,6 +6,10 @@ use App\Http\Resources\ProfileResource;
 use App\Http\Resources\ShowProfileResource;
 use Illuminate\Http\Request;
 use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -41,10 +45,63 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // public function update(Request $request, string $id)
+    // {
+    //     Profile::store($request, $id);
+    //     return response()->json(['status' => true, 'message' =>"profile updated successfully"], 200);
+    // }
+    public function update(Request $request)
     {
-        Profile::store($request, $id);
-        return response()->json(['status' => true, 'message' =>"profile updated successfully"], 200);
+        // Get the authenticated user
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not authenticated'
+            ], 401);
+        }
+
+        try {
+            // Validate the incoming request
+            $validateProfile = Validator::make($request->all(), [
+                'user_id' => 'required|inter',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'bio' => 'required|string|max:255',
+            ]);
+            if ($validateProfile->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => $validateProfile->errors()
+                ], 400);
+            }  
+            $profile = $user->profile; 
+
+            if (!$profile) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Profile not found'
+                ], 404);
+            }
+
+            // Update the profile's fields
+            $profile->user_id = $request->user_id;
+            $profile->bio = $request->bio;
+
+            // Save the updated profile
+            $profile->save();
+
+            return response()->json([
+                'status' => true,
+                'data' => $profile,
+                'message' => 'Profile updated successfully',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
     }
 
     /**

@@ -42,7 +42,9 @@ Route::middleware("auth:sanctum")->group(function(){
 Route::get('profile/list',[ProfileController::class,'index']);
 Route::post('profile/create',[ProfileController::class,'store']);
 Route::get('profile/show/{id}',[ProfileController::class,'show']);
-Route::put('profile/update/{id}',[ProfileController::class,'update']);
+// Route::put('profile/update',[ProfileController::class,'update']);
 Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
-
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('profile', [ProfileController::class, 'update']);
+});
 
