@@ -47,21 +47,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function friends()
+    public function sentFriendRequests()
     {
-        return $this->belongsToMany(User::class, 'friendships', 'user_id', 'friend_id')
-            ->withTimestamps();
+        return $this->hasMany(FriendRequest::class, 'sender_id');
     }
 
-    public function addFriend(User $friend)
+    public function receivedFriendRequests()
     {
-        $this->friends()->attach($friend->id);
-        $friend->friends()->attach($this->id);
-    }
-
-    public function removeFriend(User $friend)
-    {
-        $this->friends()->detach($friend->id);
-        $friend->friends()->detach($this->id);
+        return $this->hasMany(FriendRequest::class, 'receiver_id');
     }
 }
