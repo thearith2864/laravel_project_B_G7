@@ -48,16 +48,11 @@ Route::get('profile/show/{id}',[ProfileController::class,'show']);
 Route::put('profile/update/{id}',[ProfileController::class,'update']);
 Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
 
-// Friendships
-Route::get('friend/list', [FriendController::class,'index']);
-Route::post('friend/create', [FriendController::class,'store']);
-Route::get('friend/show/{id}', [FriendController::class,'show']);
-Route::put('friend/update/{id}', [FriendController::class,'update']);
-Route::delete('friend/delete/{id}', [FriendController::class,'destroy']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/friends', [FriendRequestController::class, 'index']);
     Route::post('/friends', [FriendRequestController::class, 'store']);
     Route::put('/friends/{id}', [FriendRequestController::class, 'update']);
     Route::delete('/friends/{id}', [FriendRequestController::class, 'destroy']);
+    Route::get('/friends/list', [FriendRequestController::class, 'friendsList']);
 });

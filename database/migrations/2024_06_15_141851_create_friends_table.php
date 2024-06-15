@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->integer('user_id1');
+            $table->integer('user_id2');
             $table->softDeletes();
             $table->timestamps();
         });
