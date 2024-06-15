@@ -32,10 +32,10 @@ Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 
 Route::middleware("auth:sanctum")->group(function(){
 //    start post user router 
-    Route::post('post/create', [postcontroller::class, 'store']);
-    Route::get('post/list', [postcontroller::class, 'index']);
-    Route::put('post/update/{id}', [postcontroller::class,'update']);
     Route::delete('post/delete/{id}', [postcontroller::class,'destroy']);
+    Route::post('post/create', [postcontroller::class, 'store']);
+    Route::put('post/update/{id}', [postcontroller::class,'update']);
+    Route::get('post/list', [postcontroller::class, 'index']);
     // end post user router
     //start comment user router
     Route::post('comment/create', [commentcontroller::class, 'store']);
@@ -48,12 +48,15 @@ Route::middleware("auth:sanctum")->group(function(){
     Route::delete('reaction/delete/{id}', [reactioncontroller::class, 'destroy']);
     // end reaction user router
     //profile routes
-    Route::get('profile/list',[ProfileController::class,'index']);
     Route::post('profile/create',[ProfileController::class,'store']);
     Route::get('profile/show/{id}',[ProfileController::class,'show']);
     Route::put('profile/update/{id}',[ProfileController::class,'update']);
     Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
-});
+    Route::get('profile/list',[ProfileController::class,'index']);
+    // end profile router
+    // start share psot 
+    
+    });
 
 
 
