@@ -16,8 +16,7 @@ class ShowProfileResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'user'=>$this->users->name ?? '',
+            'name'=>$this->name,
             'image'=>$this->image,
             'bio' => $this->bio,
         ];
