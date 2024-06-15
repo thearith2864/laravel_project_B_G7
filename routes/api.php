@@ -65,9 +65,3 @@ Route::get('friend/show/{id}', [FriendController::class,'show']);
 Route::put('friend/update/{id}', [FriendController::class,'update']);
 Route::delete('friend/delete/{id}', [FriendController::class,'destroy']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/friends', [FriendRequestController::class, 'index']);
-    Route::post('/friends', [FriendRequestController::class, 'store']);
-    Route::put('/friends/{id}', [FriendRequestController::class, 'update']);
-    Route::delete('/friends/{id}', [FriendRequestController::class, 'destroy']);
-});
