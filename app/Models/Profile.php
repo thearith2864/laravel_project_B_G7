@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class Profile extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','image'];
+    protected $fillable = ['user_id','image','bio'];
 
     public function users(): BelongsTo
     {
@@ -29,7 +29,7 @@ class Profile extends Model
     //     return $date;
     // }
     public static function store($request, $id=null){
-        $data = $request->only('user_id', 'image');
+        $data = $request->only('user_id', 'image','bio');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -38,7 +38,6 @@ class Profile extends Model
             $data['image'] = Storage::url($path);
         }
         $media = self::updateOrCreate(['id' => $id], $data);
-
         return $media;
     }
     public static function destroy($id)

@@ -26,20 +26,12 @@ class commentcontroller extends Controller
         return ["success" => true, "Message" =>"comment created successfully"];
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
+        Comment::updateComment($request, $id);
+        return ["success" => true, "Message" =>"comment updated successfully"];
     }
 
     /**
@@ -48,5 +40,7 @@ class commentcontroller extends Controller
     public function destroy(string $id)
     {
         //
+        Comment::deleteComment($id);
+        return ["success" => true, "Message" =>"comment deleted successfully"];
     }
 }

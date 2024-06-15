@@ -44,4 +44,14 @@ class Post extends Model
         $data = self::updateOrCreate(['id' => $id], $data);
         return $data;
     }
+    public static function edit ($request, $id){
+        $data = $request->only('title');
+        $data = self::updateOrCreate(['id' => $id], $data);
+        return $data;
+    }
+    public static function destroy ($id){
+        $data = self::find($id);
+        $data->delete();
+        return $data;
+    }
 }

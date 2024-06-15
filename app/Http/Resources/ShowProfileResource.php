@@ -17,12 +17,9 @@ class ShowProfileResource extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'user' => [
-                'name' => $this->users?->name ?? '',
-                'email' => $this->users?->email ?? '',
-            ],
-            // 'user'=>LispostResource::collection($this->users),
+            'user'=>$this->users->name ?? '',
             'image'=>$this->image,
+            'bio' => $this->bio,
         ];
     }
 }
