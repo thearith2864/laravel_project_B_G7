@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\FriendRequest;
+use App\Models\Friend;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class FriendRequestController extends Controller
 {
-    //
     public function index()
     {
         $user = Auth::user();
@@ -47,6 +46,14 @@ class FriendRequestController extends Controller
 
         if ($friendRequest && $friendRequest->receiver_id == Auth::id()) {
             $friendRequest->update(['status' => $request->status]);
+
+            if ($request->status == 'accepted') {
+                Friend::create([
+                    'user_id1' => $friendRequest->sender_id,
+                    'user_id2' => $friendRequest->receiver_id,
+                ]);
+            }
+
             return response()->json(['message' => 'Friend request updated successfully']);
         }
 
@@ -63,5 +70,19 @@ class FriendRequestController extends Controller
         }
 
         return response()->json(['message' => 'Friend request not found or unauthorized'], 404);
+    }
+    public function friendsList()
+    {
+        $user = Auth::user();
+        $friends = Friend::where('user_id1', $user->id)
+                         ->orWhere('user_id2', $user->id)
+                         ->get();
+
+        $friendDetails = $friends->map(function ($friend) use ($user) {
+            $friendId = $friend->user_id1 == $user->id ? $friend->user_id2 : $friend->user_id1;
+            return User::find($friendId);
+        });
+
+        return response()->json($friendDetails);
     }
 }
