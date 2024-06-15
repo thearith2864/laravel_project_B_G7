@@ -24,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'bio'
     ];
     public function Profile(): HasOne
     {

@@ -32,17 +32,34 @@ Route::get('user/register/list',[UserController::class,'listRigisterUsers']);
 //user login
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
+//profile registration
+Route::get('profile/list',[ProfileController::class,'index']);
+Route::put('profile/update',[ProfileController::class,'store']);
 
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::middleware("auth:sanctum")->group(function(){
-    //login
-
+  
     //post registration
     route::post('post/create', [postcontroller::class, 'store']);
     route::get('post/list', [postcontroller::class, 'index']);
+    //profile user
+    Route::post('/profiles',[ProfileController::class,'uploadImage']);
+    Route::get('/profiles/show',[ProfileController::class,'show']);
+    //    start post user router 
+    Route::post('post/create', [postcontroller::class, 'store']);
+    Route::get('post/list', [postcontroller::class, 'index']);
+    Route::put('post/update/{id}', [postcontroller::class,'update']);
+    Route::delete('post/delete/{id}', [postcontroller::class,'destroy']);
+    // end post user router
+    //start comment user router
     Route::post('comment/create', [commentcontroller::class, 'store']);
     Route::post('reaction/craete', [reactioncontroller::class, 'store']);
     //profile
+    Route::put('reaction/update/{id}', [reactioncontroller::class, 'update']);
+    Route::delete('reaction/delete/{id}', [reactioncontroller::class, 'destroy']);
+    // end reaction user router
+    //profile routes
+    
     Route::put('profile/update/{id}',[ProfileController::class,'update']);
     //friend
     Route::get('/friends', [FriendRequestController::class, 'index']);
@@ -64,4 +81,6 @@ Route::post('friend/create', [FriendController::class,'store']);
 Route::get('friend/show/{id}', [FriendController::class,'show']);
 Route::put('friend/update/{id}', [FriendController::class,'update']);
 Route::delete('friend/delete/{id}', [FriendController::class,'destroy']);
+
+
 
