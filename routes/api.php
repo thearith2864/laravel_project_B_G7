@@ -36,7 +36,7 @@ Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 Route::middleware("auth:sanctum")->group(function(){
     //login
     Route::post('user/login',[UserController::class,'userLogin']);
-
+    
     //post registration
     route::post('post/create', [postcontroller::class, 'store']);
     route::get('post/list', [postcontroller::class, 'index']);
