@@ -40,44 +40,46 @@ Route::post('user/forgot-password', [UserController::class, 'forgotPassword']);
 Route::post('user/reset-password', [UserController::class, 'resetPassword']);
 Route::middleware("auth:sanctum")->group(function(){
   
-    //post registration
-    // route::post('post/create', [postcontroller::class, 'addPost']);
-    // route::get('post/list', [postcontroller::class, 'index']);
+    
     //profile user
     Route::get('profile', [ProfileController::class, 'show']);
     Route::post('profile/upload-image', [ProfileController::class, 'uploadImage']); // This may be redundant with update
     Route::put('profile/edit', [ProfileController::class, 'update']);
     
 
+    
     //    start post user router 
-    // Route::post('post/create', [postcontroller::class, 'store']);
-    // Route::get('post/list', [postcontroller::class, 'index']);
-    // Route::put('post/update/{id}', [postcontroller::class,'update']);
-//    start post user router 
     Route::delete('post/delete/{id}', [postcontroller::class,'destroy']);
     Route::post('/add-post', [postcontroller::class, 'addPost']);
     Route::put('post/update/{id}', [postcontroller::class,'update']);
     Route::get('post/list', [postcontroller::class, 'index']);
     // end post user router
+
     //start comment user router
     Route::post('comment/create', [commentcontroller::class, 'store']);
     Route::put('comment/update/{id}', [commentcontroller::class, 'update']);
     Route::delete('comment/delete/{id}', [commentcontroller::class, 'destroy']);
     // end comment user router
+
     //start reaction user router
     Route::post('reaction/craete', [reactioncontroller::class, 'store']);
     //profile
     Route::put('reaction/update/{id}', [reactioncontroller::class, 'update']);
     Route::delete('reaction/delete/{id}', [reactioncontroller::class, 'destroy']);
     // end reaction user router
+
     //profile routes
     Route::post('profile/create',[ProfileController::class,'store']);
     Route::get('profile/show/{id}',[ProfileController::class,'show']);
     Route::put('profile/update/{id}',[ProfileController::class,'update']);
     Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
     Route::get('profile/list',[ProfileController::class,'index']);
-    // end profile router
-    // start share psot 
+    //friend 
+    Route::post('/friends', [FriendRequestController::class, 'store']);
+    Route::put('/friends/{id}', [FriendRequestController::class, 'update']);
+    Route::delete('/friends/{id}', [FriendRequestController::class, 'destroy']);
+    Route::get('/friends/list', [FriendRequestController::class, 'friendsList']);
+    
     
     });
 
@@ -86,4 +88,6 @@ Route::get('profile/list',[ProfileController::class,'index']);
 Route::post('profile/create',[ProfileController::class,'store']);
 Route::get('profile/show/{id}',[ProfileController::class,'show']);
 Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
+
+
 
