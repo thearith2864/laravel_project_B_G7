@@ -35,6 +35,9 @@ Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 
 
 Route::post('user/login',[UserController::class,'userLogin']);
+//forgot password
+Route::post('user/forgot-password', [UserController::class, 'forgotPassword']);
+Route::post('user/reset-password', [UserController::class, 'resetPassword']);
 Route::middleware("auth:sanctum")->group(function(){
   
     //post registration

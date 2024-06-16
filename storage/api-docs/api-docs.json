@@ -60,7 +60,7 @@
         "/api/user/login": {
             "post": {
                 "tags": [
-                    "Loin"
+                    "Login"
                 ],
                 "summary": "Register a new user",
                 "operationId": "b55269fcf952d73a72023c9afebbf958",
