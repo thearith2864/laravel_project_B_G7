@@ -27,6 +27,5 @@ Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 
 //user logout
-// routes/api.php
+
 Route::post('/logout', [UserController::class,'Logout'])->middleware('auth:sanctum')->name('logout');
-// Route::get('user/logout/list',[UserController::class,'listLogoutUsers']);
