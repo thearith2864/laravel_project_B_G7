@@ -79,15 +79,9 @@ Route::middleware("auth:sanctum")->group(function(){
     Route::put('/friends/{id}', [FriendRequestController::class, 'update']);
     Route::delete('/friends/{id}', [FriendRequestController::class, 'destroy']);
     Route::get('/friends/list', [FriendRequestController::class, 'friendsList']);
+    //user logout
+    Route::post('/logout', [UserController::class,'Logout']);
+
     
-    
-    });
-
-//profile routes
-Route::get('profile/list',[ProfileController::class,'index']);
-Route::post('profile/create',[ProfileController::class,'store']);
-Route::get('profile/show/{id}',[ProfileController::class,'show']);
-Route::delete('profile/delete/{id}',[ProfileController::class,'destroy']);
-
-
+});
 
