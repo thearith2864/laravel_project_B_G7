@@ -38,8 +38,8 @@ Route::post('user/login',[UserController::class,'userLogin']);
 Route::middleware("auth:sanctum")->group(function(){
   
     //post registration
-    route::post('post/create', [postcontroller::class, 'store']);
-    route::get('post/list', [postcontroller::class, 'index']);
+    // route::post('post/create', [postcontroller::class, 'addPost']);
+    // route::get('post/list', [postcontroller::class, 'index']);
     //profile user
     Route::get('profile', [ProfileController::class, 'show']);
     Route::post('profile/upload-image', [ProfileController::class, 'uploadImage']); // This may be redundant with update
@@ -47,9 +47,9 @@ Route::middleware("auth:sanctum")->group(function(){
     
 
     //    start post user router 
-    Route::post('post/create', [postcontroller::class, 'store']);
-    Route::get('post/list', [postcontroller::class, 'index']);
-    Route::put('post/update/{id}', [postcontroller::class,'update']);
+    // Route::post('post/create', [postcontroller::class, 'store']);
+    // Route::get('post/list', [postcontroller::class, 'index']);
+    // Route::put('post/update/{id}', [postcontroller::class,'update']);
 //    start post user router 
     Route::delete('post/delete/{id}', [postcontroller::class,'destroy']);
     Route::post('/add-post', [postcontroller::class, 'addPost']);

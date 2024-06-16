@@ -27,6 +27,29 @@ class postcontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    /** 
+    * @OA\Post(
+        *     path="/api/add-Post",
+        *     tags={"add post"},
+        *     summary="post a new user",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(
+        *             type="object",
+        *             @OA\Property(property="title", type="string"),
+        *             @OA\Property(property="image", type="file"),
+        *         )
+        *     ),
+        *     @OA\Response(
+        *         response=201,
+        *         description="Successful response",
+        *         @OA\JsonContent(
+        *             type="object",
+        *             @OA\Property(property="message", type="string"),
+        *             @OA\Property(property="accessToken", type="string")
+        *         )
+        *     )
+        * )
+        */
     public function addPost(Request $request)
     {
         $media = null;

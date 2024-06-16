@@ -15,6 +15,32 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @OA\Post(
+     *     path="/api/user/register",
+     *     tags={"Register"},
+     *     summary="Register a new user",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="name", type="string"),
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="password", type="string"),
+     *             @OA\Property(property="c_password", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string"),
+     *             @OA\Property(property="accessToken", type="string")
+     *         )
+     *     )
+     * )
+     */
+
         public function createUser(Request $request)
     {
         try {
@@ -57,6 +83,30 @@ class UserController extends Controller
             'users' => $users
         ], 200);
     }
+/** 
+     * @OA\Post(
+     *     path="/api/user/login",
+     *     tags={"Login"},
+     *     summary="Register a new user",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="password", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string"),
+     *             @OA\Property(property="accessToken", type="string")
+     *         )
+     *     )
+     * )
+     */
+   
 
     // user login function
     public function userLogin(Request $request)
