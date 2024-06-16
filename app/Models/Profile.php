@@ -21,8 +21,18 @@ class Profile extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
-
+    public function media()
+    {
+        return $this->belongsTo(Media::class,'id');
+    }
+    public static function store ($request, $id = null, $mediaId){
+        $data = $request->only('image');
+        if ($mediaId !== null) {
+            $data['media_id'] = $mediaId;
+        }
+        $data = self::updateOrCreate(['id' => $id], $data);
+        return $data;
+    }
     public static function destroyProfile($id)
     {
         $profile = self::find($id);

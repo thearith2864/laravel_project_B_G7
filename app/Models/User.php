@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -31,6 +32,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+    public function media():BelongsTo
+    {
+        return $this->belongsTo(Media::class,'media_id','id');
+    }
+    
     /**
      * The attributes that should be hidden for serialization.
      *

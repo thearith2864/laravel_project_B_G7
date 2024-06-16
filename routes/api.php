@@ -32,9 +32,7 @@ Route::get('user/register/list',[UserController::class,'listRigisterUsers']);
 //user login
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::get('user/login/list',[UserController::class,'listLoginUsers']);
-//profile registration
-Route::get('profile/list',[ProfileController::class,'index']);
-Route::put('profile/update',[ProfileController::class,'store']);
+
 
 Route::post('user/login',[UserController::class,'userLogin']);
 Route::middleware("auth:sanctum")->group(function(){
@@ -43,8 +41,11 @@ Route::middleware("auth:sanctum")->group(function(){
     route::post('post/create', [postcontroller::class, 'store']);
     route::get('post/list', [postcontroller::class, 'index']);
     //profile user
-    Route::post('/profiles',[ProfileController::class,'uploadImage']);
-    Route::get('/profiles/show',[ProfileController::class,'show']);
+    Route::get('profile', [ProfileController::class, 'show']);
+    Route::post('profile/upload-image', [ProfileController::class, 'uploadImage']); // This may be redundant with update
+    Route::put('profile/edit', [ProfileController::class, 'update']);
+    
+
     //    start post user router 
     Route::post('post/create', [postcontroller::class, 'store']);
     Route::get('post/list', [postcontroller::class, 'index']);
@@ -58,9 +59,6 @@ Route::middleware("auth:sanctum")->group(function(){
     Route::put('reaction/update/{id}', [reactioncontroller::class, 'update']);
     Route::delete('reaction/delete/{id}', [reactioncontroller::class, 'destroy']);
     // end reaction user router
-    //profile routes
-    
-    Route::put('profile/update/{id}',[ProfileController::class,'update']);
     //friend
     
     Route::post('/friends', [FriendRequestController::class, 'store']);

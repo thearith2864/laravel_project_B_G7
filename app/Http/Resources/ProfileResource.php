@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Media;
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,8 +19,9 @@ class ProfileResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image'=>$this->image,
-            'bio' => $this->bio,
+            'name' => $this->name,
+            'email' => $this->email,
+            'image' => Media::where( $this->image)->get(),
         ];
     }
 }

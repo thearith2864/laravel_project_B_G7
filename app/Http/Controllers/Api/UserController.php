@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Media;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -72,16 +73,13 @@ class UserController extends Controller
                     'message' => $validateUser->errors()
                 ], 400);
             }
-
             if (!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Email or password is incorrect'
                 ], 401);
             }
-
             $user = User::where('email', $request->email)->first();
-
             return response()->json([
                 'status' => true,
                 'data' => $user,
@@ -95,7 +93,6 @@ class UserController extends Controller
             ], 500);
         }
     }
-
     public function listLoginUsers()
     {
         $users = User::all();
@@ -113,4 +110,5 @@ class UserController extends Controller
             'message' => 'Logged out successfully'
         ]);
     }
+   
 }
