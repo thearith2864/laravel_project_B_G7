@@ -21,13 +21,19 @@ class Reaction extends Model
     
     public static function store($request, $id = null){
         $data = $request->only('user_id', 'post_id', 'type_react');
-        $data = self::updateOrCreate(['id' => $id], $data);
+        $data = self::updateOrCreate([
+            'id' => $id,
+            'user_id' => Auth()-> user() -> id
+    ], $data);
         return $data;
         
     }
     public static function updateReaction ($request, $id){
-        $data = $request->only('type_react');
-        $data = self::updateOrCreate(['id' => $id], $data);
+        $data = $request->only("user_id",'type_react');
+        $data = self::updateOrCreate([
+            'id' => $id,
+            'user_id' => Auth()-> user() -> id  
+        ], $data);
         return $data;
     }
     public static function destroyReaction ($id){

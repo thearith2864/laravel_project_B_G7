@@ -20,8 +20,11 @@ class Comment extends Model
     }
     
     public static function store($request, $id = null){
-        $data = $request->only('user_id', 'post_id', 'comment');
-        $data = self::updateOrCreate(['id' => $id], $data);
+        $data = $request->only('post_id', 'comment');
+        $data = self::updateOrCreate([
+            'id' => $id,
+            'user_id' => Auth()-> user() -> id
+        ], $data);
         return $data;
         
     }

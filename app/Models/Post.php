@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -37,16 +38,23 @@ class Post extends Model
         return $list->get();
     }
     public static function store ($request, $id = null, $mediaId){
-        $data = $request->only('user_id', 'title', 'media_id');
+
+        $data = $request->only('title', 'media_id');
         if ($mediaId !== null) {
             $data['media_id'] = $mediaId;
         }
-        $data = self::updateOrCreate(['id' => $id], $data);
+        $data = self::updateOrCreate([
+            'id' => $id ,
+            'user_id' => Auth()-> user() -> id
+        ], $data);
         return $data;
     }
     public static function edit ($request, $id){
         $data = $request->only('title');
         $data = self::updateOrCreate(['id' => $id], $data);
+        
+        // echo Auth()-> user() -> id . "user update --";
+        // echo $data->user_id . "user comment - ";
         return $data;
     }
     public static function destroy ($id){
