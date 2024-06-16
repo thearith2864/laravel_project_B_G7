@@ -7,6 +7,8 @@ use App\Http\Resources\LispostResource;
 use App\Models\Media;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class postcontroller extends Controller
 {
@@ -25,9 +27,8 @@ class postcontroller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function addPost(Request $request)
     {
-        //
         $media = null;
         $mediaId = null;
         if ($request->hasFile('image')) {
@@ -35,6 +36,7 @@ class postcontroller extends Controller
             $media = Media::store($request);
             $mediaId = $media->id;
         }
+       
         Post::store($request, null, $mediaId);
         return ["success" => true, "Message" =>"Post created successfully"];
     }
@@ -54,8 +56,15 @@ class postcontroller extends Controller
     public function update(Request $request, string $id)
     {
         //
-       Post::edit($request, $id);
-        return ["success" => true, "Message" =>"Post updated successfully"];
+        $post = Post::find($id);
+        if (  Auth()-> user() -> id  == $post-> user_id){
+
+            Post::edit($request, $id);
+            return ["success" => true, "Message" =>"Post updated successfully"];
+        }else{
+            return ["success" => false, "Message" =>"You are not allowed to update this post"];
+        }
+       
     }
 
     /**
@@ -64,7 +73,12 @@ class postcontroller extends Controller
     public function destroy(string $id)
     {
         //
+        $post = Post::find($id);
+        if (  Auth()-> user() -> id  == $post-> user_id){
         Post::destroy($id);
         return ["success" => true, "Message" =>"Post deleted successfully"];
+        }else{
+            return ["success" => false, "Message" =>"You are not allowed to delete this post"];
+        }
     }
 }

@@ -33,14 +33,14 @@ Route::get('user/login/list',[UserController::class,'listLoginUsers']);
 Route::middleware("auth:sanctum")->group(function(){
 //    start post user router 
     Route::delete('post/delete/{id}', [postcontroller::class,'destroy']);
-    Route::post('post/create', [postcontroller::class, 'store']);
+    Route::post('/add-post', [postcontroller::class, 'addPost']);
     Route::put('post/update/{id}', [postcontroller::class,'update']);
     Route::get('post/list', [postcontroller::class, 'index']);
     // end post user router
     //start comment user router
     Route::post('comment/create', [commentcontroller::class, 'store']);
     Route::put('comment/update/{id}', [commentcontroller::class, 'update']);
-    Route::delete('comment/delete', [commentcontroller::class, 'destroy']);
+    Route::delete('comment/delete/{id}', [commentcontroller::class, 'destroy']);
     // end comment user router
     //start reaction user router
     Route::post('reaction/craete', [reactioncontroller::class, 'store']);
